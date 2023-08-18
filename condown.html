@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #countdown {
+            font-size: 24px;
+            text-align: center;
+            color: red;
+            font-weight: bold;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="countdown">
+        Die Realisierung dieser Webseite ist am<br>
+        3. September 2023 um 16:00 Uhr
+    </div>
+
+    <script>
+        // Ziel-Datum und -Uhrzeit festlegen (3. September 2023 um 16:00 Uhr)
+        var targetDate = new Date('2023-09-03T16:00:00');
+
+        function updateCountdown() {
+            var now = new Date();
+            var timeDifference = targetDate - now;
+
+            if (timeDifference > 0) {
+                var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                document.getElementById('countdown').innerHTML = `
+                    Die Realisierung dieser Webseite ist am<br>
+                    3. September 2023 um 16:00 Uhr<br>
+                    Noch ${days} Tage, ${hours} Stunden, ${minutes} Minuten, ${seconds} Sekunden
+                `;
+
+                setTimeout(updateCountdown, 1000); // Aktualisierung alle 1 Sekunde
+            } else {
+                document.getElementById('countdown').innerHTML = 'Der Countdown ist abgelaufen!';
+            }
+        }
+
+        updateCountdown(); // Countdown bei Seitenaufruf starten
+    </script>
+</body>
+</html>
